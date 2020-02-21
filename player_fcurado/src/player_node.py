@@ -118,7 +118,7 @@ class Player:
         print('green_team = ' + str(green_team))
         print('blue_team = ' + str(blue_team))
 
-        if self.player_name in red_tea:
+        if self.player_name in red_team:
             self.my_team = 'red'
             self.prey = 'green'
             self.hunter = 'blue'
@@ -146,8 +146,8 @@ class Player:
 
         max_vel, max_angle = msg.turtle, math.pi / 30
 
-        if msg.green_alive:  # PURSUIT MODE: Follow any green player (only if there is at least one green alive)
-            target = msg.green_alive[0]  # select the first alive green player (I am hunting green)
+        if msg.red_alive:  # PURSUIT MODE: Follow any green player (only if there is at least one green alive)
+            target = msg.red_alive[0]  # select the first alive green player (I am hunting green)
             distance, angle = getDistanceAndAngleToTarget(self.listener,
                                                           self.player_name, target)
 
