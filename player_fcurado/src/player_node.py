@@ -12,6 +12,7 @@ import tf
 from geometry_msgs.msg import Transform, Quaternion
 import numpy as np
 
+from visualization_msgs.msg import Marker
 
 def getDistanceAndAngleToTarget(tf_listener, my_name, target_name,
                                 time=rospy.Time(0), max_time_to_wait=1.0):
