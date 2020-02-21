@@ -1,7 +1,9 @@
-# from rws2020_msgs.msg import MakeAPlay
+#!/usr/bin/env python
+
+from rws2020_msgs.msg import MakeAPlay
 # from rws2020_lib.utils import movePlayer, randomizePlayerPose, getDistanceAndAngleToTarget
 
-#!/usr/bin/env python
+
 import random
 
 import math
@@ -130,8 +132,8 @@ class Player:
             self.my_team = 'blue'
             self.pray_team = 'red'
             self.hunter_team = 'green'
-        else
-            rospy.logger('My name is not in my team. I want to play')
+        else:
+            rospy.loginfo('My name is not in my team. I want to play')
             exit(0)
 
         rospy.logwarn('I am ' + self.player_name + ' and I an on team ' + self.my_team + '. ' + self.pray_team + ' players are all going to die')
@@ -172,8 +174,6 @@ def main():
     rospy.init_node('fcurado', anonymous=False)
 
     player = Player('fcurado')
-
-    rospy.Subscriber("chatter", String, callback)
     rospy.spin()
 
 
