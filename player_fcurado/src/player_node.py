@@ -14,6 +14,7 @@ import numpy as np
 
 from visualization_msgs.msg import Marker
 
+
 def getDistanceAndAngleToTarget(tf_listener, my_name, target_name,
                                 time=rospy.Time(0), max_time_to_wait=1.0):
     try:
@@ -105,6 +106,7 @@ def movePlayer(tf_broadcaster, player_name, transform_now, vel, angle, max_vel):
 
     tf_broadcaster.sendTransform(trans, quat, rospy.Time.now(), player_name, "world")
 
+
 class Player:
 
     def __init__(self, player_name):
@@ -139,7 +141,7 @@ class Player:
             self.prey = 'green'
             self.hunter = 'blue'
         elif self.player_name in green_team:
-            self.my_team='green'
+            self.my_team = 'green'
             self.prey_team = 'blue'
             self.hunter_team = 'red'
         elif self.player_name in blue_team:
@@ -150,7 +152,8 @@ class Player:
             rospy.loginfo('My name is not in my team. I want to play')
             exit(0)
 
-        rospy.logwarn('I am ' + self.player_name + ' and I an on team ' + self.my_team + '. ' + self.pray_team + ' players are all going to die')
+        rospy.logwarn(
+            'I am ' + self.player_name + ' and I an on team ' + self.my_team + '. ' + self.pray_team + ' players are all going to die')
 
         self.br = tf.TransformBroadcaster()
         self.transform = Transform()
@@ -191,10 +194,11 @@ class Player:
 
 
 def main():
-#    print("Hello player node!")
+    #    print("Hello player node!")
     rospy.init_node('fcurado', anonymous=False)
     player = Player('fcurado')
     rospy.spin()
+
 
 if __name__ == "__main__":
     main()
