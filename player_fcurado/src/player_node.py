@@ -163,7 +163,8 @@ class Player:
 
     def makeAPlayCallBack(self, msg):
 
-        max_vel, max_angle = msg.turtle, math.pi / 30
+        #max_vel, max_angle = msg.turtle, math.pi / 30
+        max_vel, max_angle = msg.turtle, math.pi / 15
 
         if msg.red_alive:  # PURSUIT MODE: Follow any green player (only if there is at least one green alive)
             target = msg.red_alive[0]  # select the first alive green player (I am hunting green)
