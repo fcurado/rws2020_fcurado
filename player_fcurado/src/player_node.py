@@ -2,11 +2,8 @@
 
 from rws2020_msgs.msg import MakeAPlay
 # from rws2020_lib.utils import movePlayer, randomizePlayerPose, getDistanceAndAngleToTarget
-
 import random
-
 import math
-
 import rospy
 import tf
 from geometry_msgs.msg import Transform, Quaternion
@@ -14,6 +11,7 @@ import numpy as np
 
 from visualization_msgs.msg import Marker
 from rws2020_msgs.srv import Warp, WarpResponse
+
 
 def getDistanceAndAngleToTarget(tf_listener, my_name, target_name,
                                 time=rospy.Time(0), max_time_to_wait=1.0):
@@ -60,7 +58,7 @@ def movePlayer(tf_broadcaster, player_name, transform_now, vel, angle, max_vel):
     :param max_vel: maximum velocity or displacement based on the selected animal
     """
     #max_angle = math.pi / 30
-    max_angle = math.pi / 15
+    max_angle = math.pi / 45
 
     if angle > max_angle:
         angle = max_angle
@@ -165,10 +163,13 @@ class Player:
         self.warp_server = rospy.Service('~warp',Warp, self.warpServiceCallback) # start teh server
 
     def warpServiceCallback(selfself, req):
-        rospy.loginfo("someone called the service for " + req.player)
+        rospy.loginfo("someone called the service for ")
+
+        quat = (0, 0, 0, 1)
+        trans = (req.x, req.y, 0)
+        self.br.sendTransform(trans, quat, rospy.Time.now(), self.player_name, "world")
+
         response = WarpResponse()
-        response.x = 0
-        response.y = 0
         response.success = True
         return response
 
@@ -176,7 +177,7 @@ class Player:
 
 
         #max_vel, max_angle = msg.turtle, math.pi / 30
-        max_vel, max_angle = msg.turtle, math.pi / 15
+        max_vel, max_angle = msg.turtle, math.pi / 45
 
         if msg.red_alive:  # PURSUIT MODE: Follow any green player (only if there is at least one green alive)
             target = msg.red_alive[0]  # select the first alive green player (I am hunting green)
