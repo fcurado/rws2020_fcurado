@@ -59,7 +59,8 @@ def movePlayer(tf_broadcaster, player_name, transform_now, vel, angle, max_vel):
     :param angle: angle to turn, limited by max_angle (pi/30)
     :param max_vel: maximum velocity or displacement based on the selected animal
     """
-    max_angle = math.pi / 30
+    #max_angle = math.pi / 30
+    max_angle = math.pi / 15
 
     if angle > max_angle:
         angle = max_angle
