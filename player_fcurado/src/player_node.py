@@ -162,7 +162,7 @@ class Player:
 
         self.warp_server = rospy.Service('~warp',Warp, self.warpServiceCallback) # start teh server
 
-    def warpServiceCallback(selfself, req):
+    def warpServiceCallback(self, req):
         rospy.loginfo("someone called the service for ")
 
         quat = (0, 0, 0, 1)
