@@ -173,7 +173,7 @@ class Player:
             rospy.loginfo(self.player_name + ': Hunting ' + str(target) + '(' + str(distance) + ' away)')
 
             self.m.header.stamp = rospy.Time.now()
-            self.m.text = 'Oh ' + target + ' tas tramado!'
+            self.m.text = 'Oh ' + target + ' Nao tens hipotese!'
             self.pub_bocas.publish(self.m)
         else:  # what else to do? Lets just move towards the center
             target = 'world'
@@ -183,7 +183,7 @@ class Player:
             rospy.loginfo('I am ' + str(distance) + ' from ' + target)
 
             self.m.header.stamp = rospy.Time.now()
-            self.m.text = 'Nada para fazer.'
+            self.m.text = 'Sem adversarios...'
             self.pub_bocas.publish(self.m)
 
         # Actually move the player
