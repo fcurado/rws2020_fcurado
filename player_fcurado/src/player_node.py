@@ -13,7 +13,7 @@ from geometry_msgs.msg import Transform, Quaternion
 import numpy as np
 
 from visualization_msgs.msg import Marker
-
+from rws2020_msgs.srv import Warp, WarpResponse
 
 def getDistanceAndAngleToTarget(tf_listener, my_name, target_name,
                                 time=rospy.Time(0), max_time_to_wait=1.0):
@@ -162,7 +162,18 @@ class Player:
 
         rospy.Subscriber("make_a_play", MakeAPlay, self.makeAPlayCallBack)  # Subscribe make a play msg
 
+        self.warp_server = rospy.Service('~warp',Warp, self.warpServiceCallback) # start teh server
+
+    def warpServiceCallback(selfself, req):
+        rospy.loginfo("someone called the service for " + req.player)
+        response = WarpResponse()
+        response.x = 0
+        response.y = 0
+        response.success = True
+        return response
+
     def makeAPlayCallBack(self, msg):
+
 
         #max_vel, max_angle = msg.turtle, math.pi / 30
         max_vel, max_angle = msg.turtle, math.pi / 15
